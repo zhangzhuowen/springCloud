@@ -7,6 +7,7 @@ mybatis:
 
 spring:
   application:
+    # 3个服务名称一致是前提
     name: springcloud-provider-dept
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
