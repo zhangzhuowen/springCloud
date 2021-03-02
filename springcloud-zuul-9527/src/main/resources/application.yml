@@ -1,0 +1,23 @@
+server:
+  port: 9527
+spring:
+  application:
+    name: springcloud-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+      #修改Eureka上的默认描述信息
+      instance:
+        instance-id: zuul9527.com
+        prefer-ip-address: true
+
+
+#http://www.chriscloud.com:9527/springcloud-provider-dept/dept/get/1  ===> http://www.chriscloud.com:9527/mydept/dept/get/1
+zuul:
+  routes:
+    mydept.serviceId: springcloud-provider-dept
+    mydept.path: /mydept/**
+  # 不能再使用这个路径访问了，*： 忽略,隐藏全部的服务名称~   ignored-services: “*” （实际开发中）
+  ignored-services: springcloud-provider-dept
+  # prefix: /navinfo  #http://www.chriscloud.com:9527/navinfo/mydept/dept/get/1 设置公共的前缀
